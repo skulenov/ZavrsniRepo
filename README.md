@@ -14,12 +14,17 @@ Serverska aplikacija (BaseApp) ima ugrađenu funkcionalnost generiranja "dummy" 
 
 Oblik zapisa podataka u kojem ih aplikacija prima je niz bajtova dužine 6 sa definiranim značenjem svake pozicije u nizu:
 
-poz 0 = data start check byte, value = (byte)204
-poz 1 = id byte, value = (byte)'@'
-poz 2 = temperature, value min,max = (byte)(0,255)
-poz 3 = humidity, value min,max = (byte)(0,255)
-poz 4 = light, value min,max = (byte)(0,255)
-poz 5 = data end check byte, value = (byte)185
+poz 0 = data start check byte| value = (byte)204
+
+poz 1 = id byte| value = (byte)'@'
+
+poz 2 = temperature| value min,max = (byte)(0,255)
+
+poz 3 = humidity| value min,max = (byte)(0,255)
+
+poz 4 = light| value min,max = (byte)(0,255)
+
+poz 5 = data end check byte| value = (byte)185
 
 Upravljački program će periodički ostvarivati TCP/IP konekciju na serversku aplikaciju, poslati paket podataka i odspojiti se.
 
