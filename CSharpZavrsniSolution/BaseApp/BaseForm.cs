@@ -124,11 +124,6 @@ namespace BaseApp
 
         private void FilesListView_ItemActivate(object sender, EventArgs e)
         {
-            //foreach (ListViewItem fileItem in FilesListView.SelectedItems)
-            //{
-            //PlotForm plot = new PlotForm(fileItem.Tag.ToString());
-            //plot.Show();
-            //}
             string[] files = new string[FilesListView.SelectedItems.Count];
             for(int i= 0;i<files.Length;++i)
             {
@@ -173,7 +168,7 @@ namespace BaseApp
 
         private void HideServerInfoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (serverInfoForm.Visible == true)
+            if (serverInfoForm.Visible)
             {
                 (sender as ToolStripMenuItem).Text = "Show Server Info";
                 serverInfoForm.Hide();

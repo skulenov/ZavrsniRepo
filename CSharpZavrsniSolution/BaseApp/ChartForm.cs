@@ -22,9 +22,16 @@ namespace BaseApp
         public ChartForm(string[] dataFilesParam)
         {
             InitializeComponent();
+            
             dataFiles = dataFilesParam;
             ExtractData();
             ShowData();
+
+            ShowHideTemp.Tag = "Temperature";
+            ShowHideHumid.Tag = "Humidity";
+            ShowHideLight.Tag = "Light";
+
+
         }
 
         /// <summary>
@@ -35,12 +42,15 @@ namespace BaseApp
             FileDataMap = new Dictionary<string, FileRecords>();
             foreach (string filename in dataFiles)
             {
-                //LinkedList<Record> recList = Logger.Parse(filename);
-                //FileRecords fileRecs = Logger.Parse(recList);
                 FileDataMap.Add(filename, Logger.Parse(Logger.Parse(filename)));
             }
         }
-
+        #region Tab and Chart
+        /// <summary>
+        /// Chart building and drawing using data from files in FileDataMap.
+        /// For each file in FileDataMap a Tab control is created and given a Chart control.
+        /// Each chart contains three series. Series are LinkedList of bytes.
+        /// </summary>
         private void ShowData()
         {
             foreach (KeyValuePair<string, FileRecords> pair in FileDataMap)
@@ -54,6 +64,7 @@ namespace BaseApp
                     Dock = DockStyle.Fill,
                     
                 };
+                
                 ChartArea chartArea = new ChartArea()
                 {
                     BackColor = Color.Black
@@ -71,6 +82,7 @@ namespace BaseApp
                     ChartType = SeriesChartType.Line,
                     XValueType = ChartValueType.DateTime
                 };
+                
                 Series humidSeries = new Series("Humidity")
                 {
                     ChartType = SeriesChartType.Line,
@@ -96,41 +108,25 @@ namespace BaseApp
                 tabPage.Controls.Add(chart);
                 tabPage.Tag = pair.Key;
 
-                TabContainer.Controls.Add(tabPage);
-                TabContainer.MouseUp += TabContainer_MouseUp;
+                // TabContainer tweaks and tabs
+                TabContainer.TabPages.Add(tabPage);
+                TabContainer.SelectedIndexChanged += TabContainer_SelectedIndexChanged;
             }
         }
+        #endregion
 
-        private void TabContainer_MouseUp(object sender, MouseEventArgs e)
+        private void TabContainer_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
-            if (e.Button == MouseButtons.Right)
-            {
-                MenuItem miClose = new MenuItem("Close chart");
-                miClose.Click += MiClose_Click;
-                MenuItem miSaveImage = new MenuItem("Save chart image");
-                miSaveImage.Click += MiSaveImage_Click;
+            if (TabContainer.TabPages.Count == 0) return;
 
-                ContextMenu tabCtxMenu = new ContextMenu(new MenuItem[] { miClose,miSaveImage });
-                TabContainer.ContextMenu = tabCtxMenu;
-                TabContainer.ContextMenu.Show(TabContainer, e.Location);
-            }
+            Series Temperature = (TabContainer.SelectedTab.Controls[0] as Chart).Series[ShowHideTemp.Tag as string];
+            Series Humidity = (TabContainer.SelectedTab.Controls[0] as Chart).Series[ShowHideHumid.Tag as string];
+            Series Light = (TabContainer.SelectedTab.Controls[0] as Chart).Series[ShowHideLight.Tag as string];
+            ShowHideTemp.Text = (Temperature.Enabled) ? "Hide" : "Show";
+            ShowHideHumid.Text = (Humidity.Enabled) ? "Hide" : "Show";
+            ShowHideLight.Text = (Light.Enabled) ? "Hide" : "Show";
         }
 
-        private void MiSaveImage_Click(object sender, EventArgs e)
-        {
-            (sender as MenuItem).GetContextMenu().Dispose();
-            Chart chart = TabContainer.SelectedTab.Controls[0] as Chart;
-            string tabTag = TabContainer.SelectedTab.Tag.ToString();
-            chart.SaveImage(Path.Combine(Path.GetDirectoryName(tabTag), Path.GetFileNameWithoutExtension(tabTag)+"_chartImage.png"), ChartImageFormat.Png);
-        }
-
-        private void MiClose_Click(object sender, EventArgs e)
-        {
-            
-            (sender as MenuItem).GetContextMenu().Dispose();
-            CloseTab();
-        }
 
         private void CloseToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -139,9 +135,8 @@ namespace BaseApp
 
         private void CloseTab()
         {
-            TabContainer.Controls.Remove(TabContainer.SelectedTab);
-
-            if (TabContainer.Controls.Count == 0)
+            TabContainer.TabPages.Remove(TabContainer.SelectedTab);
+            if (TabContainer.TabPages.Count == 0)
             {
                 Close();
             }
@@ -164,6 +159,44 @@ namespace BaseApp
             }
         }
 
+        private void DataVisibility_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuItem tsItem = sender as ToolStripMenuItem;
+            Series series = (TabContainer.SelectedTab.Controls[0] as Chart).Series[tsItem.Tag as string];
 
+            series.Enabled = !series.Enabled;
+            tsItem.Text = (series.Enabled) ? "Hide" : "Show";
+        }
+
+        private void DataColor_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuItem tsItem = sender as ToolStripMenuItem;
+            Series series = (TabContainer.SelectedTab.Controls[0] as Chart).Series[tsItem.Text];
+            series.Color = ShowColorDialog(series.Color);
+        }
+
+        private Color ShowColorDialog(Color oldColor)
+        {
+
+            ColorDialog cd = new ColorDialog()
+            {
+                AllowFullOpen = true,
+                AnyColor = true,
+                FullOpen = true,
+                Color = oldColor
+            };
+            if (cd.ShowDialog() == DialogResult.OK)
+            {
+                oldColor = cd.Color;
+            }
+
+            return oldColor;
+        }
+
+        private void BackgroundColor_Click(object sender, EventArgs e)
+        {
+            ChartArea ca = (TabContainer.SelectedTab.Controls[0] as Chart).ChartAreas[0];
+            ca.BackColor = ShowColorDialog(ca.BackColor);
+        }
     }
 }

@@ -47,11 +47,11 @@
             this.backgroundToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dataToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.temperatureToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.showToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ShowHideTemp = new System.Windows.Forms.ToolStripMenuItem();
             this.humidityToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.hideToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ShowHideHumid = new System.Windows.Forms.ToolStripMenuItem();
             this.lightToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.hideToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.ShowHideLight = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -88,14 +88,14 @@
             // closeToolStripMenuItem
             // 
             this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
-            this.closeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.closeToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.closeToolStripMenuItem.Text = "Close";
             this.closeToolStripMenuItem.Click += new System.EventHandler(this.CloseToolStripMenuItem_Click);
             // 
             // saveImageToolStripMenuItem
             // 
             this.saveImageToolStripMenuItem.Name = "saveImageToolStripMenuItem";
-            this.saveImageToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveImageToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.saveImageToolStripMenuItem.Text = "Save Image";
             this.saveImageToolStripMenuItem.Click += new System.EventHandler(this.SaveImageToolStripMenuItem_Click);
             // 
@@ -114,7 +114,7 @@
             this.gridToolStripMenuItem,
             this.backgroundToolStripMenuItem});
             this.colorToolStripMenuItem.Name = "colorToolStripMenuItem";
-            this.colorToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.colorToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.colorToolStripMenuItem.Text = "Color";
             // 
             // dataToolStripMenuItem
@@ -124,26 +124,29 @@
             this.humidityToolStripMenuItem,
             this.lightToolStripMenuItem});
             this.dataToolStripMenuItem.Name = "dataToolStripMenuItem";
-            this.dataToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
+            this.dataToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.dataToolStripMenuItem.Text = "Data";
             // 
             // temperatureToolStripMenuItem
             // 
             this.temperatureToolStripMenuItem.Name = "temperatureToolStripMenuItem";
-            this.temperatureToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.temperatureToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.temperatureToolStripMenuItem.Text = "Temperature";
+            this.temperatureToolStripMenuItem.Click += new System.EventHandler(this.DataColor_Click);
             // 
             // humidityToolStripMenuItem
             // 
             this.humidityToolStripMenuItem.Name = "humidityToolStripMenuItem";
-            this.humidityToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.humidityToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.humidityToolStripMenuItem.Text = "Humidity";
+            this.humidityToolStripMenuItem.Click += new System.EventHandler(this.DataColor_Click);
             // 
             // lightToolStripMenuItem
             // 
             this.lightToolStripMenuItem.Name = "lightToolStripMenuItem";
-            this.lightToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.lightToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.lightToolStripMenuItem.Text = "Light";
+            this.lightToolStripMenuItem.Click += new System.EventHandler(this.DataColor_Click);
             // 
             // gridToolStripMenuItem
             // 
@@ -153,38 +156,39 @@
             this.yMajorToolStripMenuItem,
             this.yMinorToolStripMenuItem});
             this.gridToolStripMenuItem.Name = "gridToolStripMenuItem";
-            this.gridToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
+            this.gridToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.gridToolStripMenuItem.Text = "Grid";
             // 
             // xMajorToolStripMenuItem
             // 
             this.xMajorToolStripMenuItem.Name = "xMajorToolStripMenuItem";
-            this.xMajorToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.xMajorToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.xMajorToolStripMenuItem.Text = "X Major";
             // 
             // xMinorToolStripMenuItem
             // 
             this.xMinorToolStripMenuItem.Name = "xMinorToolStripMenuItem";
-            this.xMinorToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.xMinorToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.xMinorToolStripMenuItem.Text = "X Minor";
             // 
             // yMajorToolStripMenuItem
             // 
             this.yMajorToolStripMenuItem.Name = "yMajorToolStripMenuItem";
-            this.yMajorToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.yMajorToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.yMajorToolStripMenuItem.Text = "Y Major";
             // 
             // yMinorToolStripMenuItem
             // 
             this.yMinorToolStripMenuItem.Name = "yMinorToolStripMenuItem";
-            this.yMinorToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.yMinorToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.yMinorToolStripMenuItem.Text = "Y Minor";
             // 
             // backgroundToolStripMenuItem
             // 
             this.backgroundToolStripMenuItem.Name = "backgroundToolStripMenuItem";
-            this.backgroundToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
+            this.backgroundToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.backgroundToolStripMenuItem.Text = "Background";
+            this.backgroundToolStripMenuItem.Click += new System.EventHandler(this.BackgroundColor_Click);
             // 
             // dataToolStripMenuItem1
             // 
@@ -199,44 +203,47 @@
             // temperatureToolStripMenuItem1
             // 
             this.temperatureToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.showToolStripMenuItem});
+            this.ShowHideTemp});
             this.temperatureToolStripMenuItem1.Name = "temperatureToolStripMenuItem1";
             this.temperatureToolStripMenuItem1.Size = new System.Drawing.Size(141, 22);
             this.temperatureToolStripMenuItem1.Text = "Temperature";
             // 
-            // showToolStripMenuItem
+            // ShowHideTemp
             // 
-            this.showToolStripMenuItem.Name = "showToolStripMenuItem";
-            this.showToolStripMenuItem.Size = new System.Drawing.Size(99, 22);
-            this.showToolStripMenuItem.Text = "Hide";
+            this.ShowHideTemp.Name = "ShowHideTemp";
+            this.ShowHideTemp.Size = new System.Drawing.Size(99, 22);
+            this.ShowHideTemp.Text = "Hide";
+            this.ShowHideTemp.Click += new System.EventHandler(this.DataVisibility_Click);
             // 
             // humidityToolStripMenuItem1
             // 
             this.humidityToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.hideToolStripMenuItem});
+            this.ShowHideHumid});
             this.humidityToolStripMenuItem1.Name = "humidityToolStripMenuItem1";
             this.humidityToolStripMenuItem1.Size = new System.Drawing.Size(141, 22);
             this.humidityToolStripMenuItem1.Text = "Humidity";
             // 
-            // hideToolStripMenuItem
+            // ShowHideHumid
             // 
-            this.hideToolStripMenuItem.Name = "hideToolStripMenuItem";
-            this.hideToolStripMenuItem.Size = new System.Drawing.Size(99, 22);
-            this.hideToolStripMenuItem.Text = "Hide";
+            this.ShowHideHumid.Name = "ShowHideHumid";
+            this.ShowHideHumid.Size = new System.Drawing.Size(99, 22);
+            this.ShowHideHumid.Text = "Hide";
+            this.ShowHideHumid.Click += new System.EventHandler(this.DataVisibility_Click);
             // 
             // lightToolStripMenuItem1
             // 
             this.lightToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.hideToolStripMenuItem1});
+            this.ShowHideLight});
             this.lightToolStripMenuItem1.Name = "lightToolStripMenuItem1";
             this.lightToolStripMenuItem1.Size = new System.Drawing.Size(141, 22);
             this.lightToolStripMenuItem1.Text = "Light";
             // 
-            // hideToolStripMenuItem1
+            // ShowHideLight
             // 
-            this.hideToolStripMenuItem1.Name = "hideToolStripMenuItem1";
-            this.hideToolStripMenuItem1.Size = new System.Drawing.Size(99, 22);
-            this.hideToolStripMenuItem1.Text = "Hide";
+            this.ShowHideLight.Name = "ShowHideLight";
+            this.ShowHideLight.Size = new System.Drawing.Size(99, 22);
+            this.ShowHideLight.Text = "Hide";
+            this.ShowHideLight.Click += new System.EventHandler(this.DataVisibility_Click);
             // 
             // ChartForm
             // 
@@ -247,7 +254,7 @@
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "ChartForm";
-            this.Text = "ChartForm";
+            this.Text = "Data Plot";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -276,10 +283,10 @@
         private System.Windows.Forms.ToolStripMenuItem backgroundToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem dataToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem temperatureToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem showToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ShowHideTemp;
         private System.Windows.Forms.ToolStripMenuItem humidityToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem hideToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ShowHideHumid;
         private System.Windows.Forms.ToolStripMenuItem lightToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem hideToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem ShowHideLight;
     }
 }
