@@ -130,21 +130,21 @@
             // temperatureToolStripMenuItem
             // 
             this.temperatureToolStripMenuItem.Name = "temperatureToolStripMenuItem";
-            this.temperatureToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.temperatureToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
             this.temperatureToolStripMenuItem.Text = "Temperature";
             this.temperatureToolStripMenuItem.Click += new System.EventHandler(this.DataColor_Click);
             // 
             // humidityToolStripMenuItem
             // 
             this.humidityToolStripMenuItem.Name = "humidityToolStripMenuItem";
-            this.humidityToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.humidityToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
             this.humidityToolStripMenuItem.Text = "Humidity";
             this.humidityToolStripMenuItem.Click += new System.EventHandler(this.DataColor_Click);
             // 
             // lightToolStripMenuItem
             // 
             this.lightToolStripMenuItem.Name = "lightToolStripMenuItem";
-            this.lightToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.lightToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
             this.lightToolStripMenuItem.Text = "Light";
             this.lightToolStripMenuItem.Click += new System.EventHandler(this.DataColor_Click);
             // 
@@ -164,24 +164,28 @@
             this.xMajorToolStripMenuItem.Name = "xMajorToolStripMenuItem";
             this.xMajorToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.xMajorToolStripMenuItem.Text = "X Major";
+            this.xMajorToolStripMenuItem.Click += new System.EventHandler(this.XMajorColor_Click);
             // 
             // xMinorToolStripMenuItem
             // 
             this.xMinorToolStripMenuItem.Name = "xMinorToolStripMenuItem";
             this.xMinorToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.xMinorToolStripMenuItem.Text = "X Minor";
+            this.xMinorToolStripMenuItem.Click += new System.EventHandler(this.XMinorColor_Click);
             // 
             // yMajorToolStripMenuItem
             // 
             this.yMajorToolStripMenuItem.Name = "yMajorToolStripMenuItem";
             this.yMajorToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.yMajorToolStripMenuItem.Text = "Y Major";
+            this.yMajorToolStripMenuItem.Click += new System.EventHandler(this.YMajorColor_Click);
             // 
             // yMinorToolStripMenuItem
             // 
             this.yMinorToolStripMenuItem.Name = "yMinorToolStripMenuItem";
             this.yMinorToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.yMinorToolStripMenuItem.Text = "Y Minor";
+            this.yMinorToolStripMenuItem.Click += new System.EventHandler(this.YMinorColor_Click);
             // 
             // backgroundToolStripMenuItem
             // 

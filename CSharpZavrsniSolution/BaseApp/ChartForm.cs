@@ -115,6 +115,11 @@ namespace BaseApp
         }
         #endregion
 
+        /// <summary>
+        /// Helper procedure for updating Menu items when switching between tabs.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void TabContainer_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (TabContainer.TabPages.Count == 0) return;
@@ -133,6 +138,9 @@ namespace BaseApp
             CloseTab();
         }
 
+        /// <summary>
+        /// Closes current tab and checks if there are any tabs left. If TabPages collection is empty, close the whole Form(window).
+        /// </summary>
         private void CloseTab()
         {
             TabContainer.TabPages.Remove(TabContainer.SelectedTab);
@@ -159,6 +167,11 @@ namespace BaseApp
             }
         }
 
+        /// <summary>
+        /// Event handler for Click on any of the Show/Hide Data menu items.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DataVisibility_Click(object sender, EventArgs e)
         {
             ToolStripMenuItem tsItem = sender as ToolStripMenuItem;
@@ -168,6 +181,11 @@ namespace BaseApp
             tsItem.Text = (series.Enabled) ? "Hide" : "Show";
         }
 
+        /// <summary>
+        /// Event handler for data series color selection (Color Dialog).
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DataColor_Click(object sender, EventArgs e)
         {
             ToolStripMenuItem tsItem = sender as ToolStripMenuItem;
@@ -177,7 +195,6 @@ namespace BaseApp
 
         private Color ShowColorDialog(Color oldColor)
         {
-
             ColorDialog cd = new ColorDialog()
             {
                 AllowFullOpen = true,
@@ -197,6 +214,30 @@ namespace BaseApp
         {
             ChartArea ca = (TabContainer.SelectedTab.Controls[0] as Chart).ChartAreas[0];
             ca.BackColor = ShowColorDialog(ca.BackColor);
+        }
+
+        private void XMajorColor_Click(object sender, EventArgs e)
+        {
+            ChartArea ca = (TabContainer.SelectedTab.Controls[0] as Chart).ChartAreas[0];
+            ca.AxisX.MajorGrid.LineColor = ShowColorDialog(ca.AxisX.MajorGrid.LineColor);
+        }
+
+        private void XMinorColor_Click(object sender, EventArgs e)
+        {
+            ChartArea ca = (TabContainer.SelectedTab.Controls[0] as Chart).ChartAreas[0];
+            ca.AxisX.MinorGrid.LineColor = ShowColorDialog(ca.AxisX.MinorGrid.LineColor);
+        }
+
+        private void YMajorColor_Click(object sender, EventArgs e)
+        {
+            ChartArea ca = (TabContainer.SelectedTab.Controls[0] as Chart).ChartAreas[0];
+            ca.AxisY.MajorGrid.LineColor = ShowColorDialog(ca.AxisY.MajorGrid.LineColor);
+        }
+
+        private void YMinorColor_Click(object sender, EventArgs e)
+        {
+            ChartArea ca = (TabContainer.SelectedTab.Controls[0] as Chart).ChartAreas[0];
+            ca.AxisY.MinorGrid.LineColor = ShowColorDialog(ca.AxisY.MinorGrid.LineColor);
         }
     }
 }
