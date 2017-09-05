@@ -87,9 +87,11 @@ namespace BaseApp
                     {
                         ListViewItem fileItem = new ListViewItem(Path.GetFileNameWithoutExtension(f))
                         {
-                            Tag = f
+                            Tag = f,
+                            Name = Path.GetFileNameWithoutExtension(f)
                         };
-                        FilesListView.Items.Add(fileItem);
+                        if (FilesListView.Items.Find(fileItem.Name,false).Length != 0) continue;
+                        else FilesListView.Items.Add(fileItem);
                     }
                 }
                 catch (Exception ex)

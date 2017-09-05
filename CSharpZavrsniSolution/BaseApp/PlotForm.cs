@@ -11,7 +11,7 @@ namespace BaseApp
         private PointF[] pfHumid;
         private PointF[] pfLight;
 
-        private LinkedList<Record> dataList;
+        private List<Record> dataList;
         
         private PointF plotOrigin;
         private Size plotSize;
@@ -60,13 +60,13 @@ namespace BaseApp
             pfHumid = new PointF[count];
             pfLight = new PointF[count];
 
-            for (LinkedListNode<Record> ba = dataList.First; ba != null; ba = ba.Next)
+            for (int i=0; i<dataList.Count; ++i)
             {
                 float xCoord = currentIndex * xScale + 1 + plotOrigin.X;
 
-                pfTemp[currentIndex] = new PointF(xCoord, (plotOrigin.Y + plotSize.Height) - (ba.Value.Temperature * yScale + 1));
-                pfHumid[currentIndex] = new PointF(xCoord, (plotOrigin.Y + plotSize.Height) - (ba.Value.Humidity * yScale + 1));
-                pfLight[currentIndex] = new PointF(xCoord, (plotOrigin.Y + plotSize.Height) - (ba.Value.Light * yScale + 1));
+                pfTemp[currentIndex] = new PointF(xCoord, (plotOrigin.Y + plotSize.Height) - (dataList[i].Temperature * yScale + 1));
+                pfHumid[currentIndex] = new PointF(xCoord, (plotOrigin.Y + plotSize.Height) - (dataList[i].Humidity * yScale + 1));
+                pfLight[currentIndex] = new PointF(xCoord, (plotOrigin.Y + plotSize.Height) - (dataList[i].Light * yScale + 1));
 
                 ++currentIndex;
             }

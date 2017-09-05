@@ -29,13 +29,14 @@ namespace BaseApp
             PBarRecords.Visible = true;
             PBarRecords.Value = 1;
 
+            Random rnd = new Random();
+
             for (int i = 0; i < NUDNumOfFiles.Value; ++i)
             {
                 string fullPath = Path.Combine(filePath, fileName + "_" + i + ".bin");
 
                 for (int j = 0; j < NUDNumOfRecords.Value; j++)
                 {
-                    Random rnd = new Random(fullPath.GetHashCode() / (j+1));
                     byte[] data = new byte[6];
                     data[0] = 204;
                     data[1] = (byte)'%';

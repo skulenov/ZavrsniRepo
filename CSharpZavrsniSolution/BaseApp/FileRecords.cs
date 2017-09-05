@@ -7,51 +7,46 @@ using System.Threading.Tasks;
 namespace BaseApp
 {
     /// <summary>
-    /// FileRecords class converts a LinkedList of Record objects to four Linked Lists, each containing 
+    /// FileRecords class converts a List of Record objects to four Lists, each containing 
     /// one of the measurements: Time, Temperature, Humidity and Light. All four are public properties with getters.
     /// FilesRecords class is used for getting data to the Chart control which plots it.
     /// </summary>
     public class FileRecords
     {
-        private LinkedList<DateTime> time;
-        private LinkedList<byte> temperature;
-        private LinkedList<byte> humidity;
-        private LinkedList<byte> light;
-
         /// <summary>
         /// Returns LinkedList of DateTime objects.
         /// </summary>
-        public LinkedList<DateTime> Time { get => time; }
+        public readonly List<DateTime> Time;
         /// <summary>
         /// Returns LinkedList of bytes.
         /// </summary>
-        public LinkedList<byte> Temperature { get => temperature; }
+        public readonly List<byte> Temperature;
         /// <summary>
         /// Returns LinkedList of bytes.
         /// </summary>
-        public LinkedList<byte> Humidity { get => humidity; }
+        public readonly List<byte> Humidity;
         /// <summary>
         /// Returns LinkedList of bytes.
         /// </summary>
-        public LinkedList<byte> Light { get => light; }
+        public readonly List<byte> Light;
 
         /// <summary>
-        /// Constructor, converts Linked List of Record objects to four Linked Lists of measurements. Each has public getter.
+        /// Constructor, converts List of Record objects to four Lists of measurements. Each has public getter.
         /// </summary>
         /// <param name="records">File records to be converted to separate lists of measurements.</param>
-        public FileRecords(LinkedList<Record> records)
+        public FileRecords(List<Record> records)
         {
-            time = new LinkedList<DateTime>();
-            temperature = new LinkedList<byte>();
-            humidity = new LinkedList<byte>();
-            light = new LinkedList<byte>();
+            Time = new List<DateTime>();
+            Temperature = new List<byte>();
+            Humidity = new List<byte>();
+            Light = new List<byte>();
 
-            for (LinkedListNode<Record> node = records.First; node != null; node = node.Next)
+            for (int i = 0; i < records.Count; ++i)
             {
-                time.AddLast(node.Value.Time);
-                temperature.AddLast(node.Value.Temperature);
-                humidity.AddLast(node.Value.Humidity);
-                light.AddLast(node.Value.Light);
+                Time.Add(records[i].Time);
+                Temperature.Add(records[i].Temperature);
+                Humidity.Add(records[i].Humidity);
+                Light.Add(records[i].Light);
             }
         }
     }

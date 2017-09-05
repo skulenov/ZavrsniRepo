@@ -62,21 +62,21 @@ namespace BaseApp
         /// <summary>
         /// Returns FileRecords object filled with data from given LinkedList of Records.
         /// </summary>
-        /// <param name="records">A LinkedList of Record objects that hold data.</param>
+        /// <param name="records">A List of Record objects that hold data.</param>
         /// <returns>A FileRecords object containing data.</returns>
-        public static FileRecords Parse(LinkedList<Record> records)
+        public static FileRecords Parse(List<Record> records)
         {
             return new FileRecords(records);
         }
 
         /// <summary>
-        /// Parses file given by path and extracts Records in a LinkedList.
+        /// Parses file given by path and extracts Records in a List.
         /// </summary>
         /// <param name="path">String holding path and filename of the file that is to be parsed.</param>
-        /// <returns>A LinkedList of Records from given file.</returns>
-        public static LinkedList<Record> Parse(string path)
+        /// <returns>A List of Records from given file.</returns>
+        public static List<Record> Parse(string path)
         {
-            LinkedList<Record> fileData = new LinkedList<Record>();
+            List<Record> fileData = new List<Record>();
             try
             {
                 using (FileStream fs = new FileStream(path, FileMode.Open, FileAccess.Read))
@@ -91,7 +91,7 @@ namespace BaseApp
                         {
                             break;
                         }
-                        fileData.AddLast(new Record(data));
+                        fileData.Add(new Record(data));
                     }
                 }
                 return fileData;
