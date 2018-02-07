@@ -19,6 +19,8 @@ namespace BaseApp
         // Map of filenames and their data
         private Dictionary<string, FileRecords> FileDataMap;
 
+        private Timer refreshTimer;
+
         public ChartForm(string[] dataFilesParam)
         {
             InitializeComponent();
@@ -31,7 +33,18 @@ namespace BaseApp
             ShowHideHumid.Tag = "Humidity";
             ShowHideLight.Tag = "Light";
 
+            refreshTimer = new Timer();
+            refreshTimer.Interval = 10000;
+            refreshTimer.Tick += RefreshTimer_Tick;
+            refreshTimer.Start();
+        }
 
+        private void RefreshTimer_Tick(object sender, EventArgs e)
+        {
+            ExtractData();
+            TabContainer.TabPages.Clear();
+            ShowData();
+            GC.Collect();
         }
 
         /// <summary>
@@ -42,6 +55,10 @@ namespace BaseApp
             FileDataMap = new Dictionary<string, FileRecords>();
             foreach (string filename in dataFiles)
             {
+                if(FileDataMap.ContainsKey(filename))
+                {
+                    FileDataMap.Remove(filename);
+                }
                 FileDataMap.Add(filename, Logger.Parse(Logger.Parse(filename)));
             }
         }
@@ -82,6 +99,7 @@ namespace BaseApp
                     ChartType = SeriesChartType.Line,
                     XValueType = ChartValueType.DateTime
                 };
+                
                 
                 Series humidSeries = new Series("Humidity")
                 {
@@ -238,6 +256,11 @@ namespace BaseApp
         {
             ChartArea ca = (TabContainer.SelectedTab.Controls[0] as Chart).ChartAreas[0];
             ca.AxisY.MinorGrid.LineColor = ShowColorDialog(ca.AxisY.MinorGrid.LineColor);
+        }
+
+        private void ChartForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            refreshTimer.Stop();
         }
     }
 }

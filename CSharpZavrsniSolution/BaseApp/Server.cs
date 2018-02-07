@@ -138,19 +138,22 @@ namespace BaseApp
                     Log("Client connection: " + clientIPAddress);
                     UpdateServerInfoBox("\nClient connection: " + clientIPAddress + "\n");
 
-                    using (StreamReader stream = new StreamReader(client.GetStream()))
+                    using (StreamReader stream = new StreamReader(client.GetStream(),System.Text.Encoding.GetEncoding("ISO-8859-1")))
                     {
                         byte[] data = new byte[6];
+                        char[] charData = new char[6];
                         int x = 0;
 
-                        while (stream.Peek() != -1)
-                        {
-                            data[x++] = Convert.ToByte(stream.Read());
-                        }
+                        stream.Read(charData, 0, 6);
                         
+                        for (x = 0; x < charData.Length; ++x)
+                        {
+                            data[x] = Convert.ToByte(charData[x]);
+                        }
+
                         if (data[0] == 204)
                         {
-                            if (data[data.Length -1] == 185)
+                            if (data[data.Length - 1] == 185)
                             {
                                 Log(new Record(data));
                                 Log("DATA:\t" + data[1] + "\t" + data[2] + "\t" + data[3] + "\t" + data[4]);
@@ -168,12 +171,16 @@ namespace BaseApp
                 Log("Client Handler Exception: " + tae.Message + "\n" + tae.StackTrace);
                 MessageBox.Show(tae.Message + tae.StackTrace, "Client Handler Exception!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
-                Thread.Yield();
+                //Thread.Yield();
             }
             catch (Exception e)
             {
                 Log("Client Handler Exception: " + e.Message + "\n" + e.StackTrace);
                 MessageBox.Show(e.Message + e.StackTrace, "Client Handler Exception!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+            finally
+            {
+                Thread.Yield();
             }
         }
 

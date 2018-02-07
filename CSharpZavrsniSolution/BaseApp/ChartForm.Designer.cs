@@ -114,7 +114,7 @@
             this.gridToolStripMenuItem,
             this.backgroundToolStripMenuItem});
             this.colorToolStripMenuItem.Name = "colorToolStripMenuItem";
-            this.colorToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.colorToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.colorToolStripMenuItem.Text = "Color";
             // 
             // dataToolStripMenuItem
@@ -124,7 +124,7 @@
             this.humidityToolStripMenuItem,
             this.lightToolStripMenuItem});
             this.dataToolStripMenuItem.Name = "dataToolStripMenuItem";
-            this.dataToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.dataToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
             this.dataToolStripMenuItem.Text = "Data";
             // 
             // temperatureToolStripMenuItem
@@ -156,41 +156,41 @@
             this.yMajorToolStripMenuItem,
             this.yMinorToolStripMenuItem});
             this.gridToolStripMenuItem.Name = "gridToolStripMenuItem";
-            this.gridToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.gridToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
             this.gridToolStripMenuItem.Text = "Grid";
             // 
             // xMajorToolStripMenuItem
             // 
             this.xMajorToolStripMenuItem.Name = "xMajorToolStripMenuItem";
-            this.xMajorToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.xMajorToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.xMajorToolStripMenuItem.Text = "X Major";
             this.xMajorToolStripMenuItem.Click += new System.EventHandler(this.XMajorColor_Click);
             // 
             // xMinorToolStripMenuItem
             // 
             this.xMinorToolStripMenuItem.Name = "xMinorToolStripMenuItem";
-            this.xMinorToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.xMinorToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.xMinorToolStripMenuItem.Text = "X Minor";
             this.xMinorToolStripMenuItem.Click += new System.EventHandler(this.XMinorColor_Click);
             // 
             // yMajorToolStripMenuItem
             // 
             this.yMajorToolStripMenuItem.Name = "yMajorToolStripMenuItem";
-            this.yMajorToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.yMajorToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.yMajorToolStripMenuItem.Text = "Y Major";
             this.yMajorToolStripMenuItem.Click += new System.EventHandler(this.YMajorColor_Click);
             // 
             // yMinorToolStripMenuItem
             // 
             this.yMinorToolStripMenuItem.Name = "yMinorToolStripMenuItem";
-            this.yMinorToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.yMinorToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.yMinorToolStripMenuItem.Text = "Y Minor";
             this.yMinorToolStripMenuItem.Click += new System.EventHandler(this.YMinorColor_Click);
             // 
             // backgroundToolStripMenuItem
             // 
             this.backgroundToolStripMenuItem.Name = "backgroundToolStripMenuItem";
-            this.backgroundToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.backgroundToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
             this.backgroundToolStripMenuItem.Text = "Background";
             this.backgroundToolStripMenuItem.Click += new System.EventHandler(this.BackgroundColor_Click);
             // 
@@ -259,6 +259,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "ChartForm";
             this.Text = "Data Plot";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ChartForm_FormClosing);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);

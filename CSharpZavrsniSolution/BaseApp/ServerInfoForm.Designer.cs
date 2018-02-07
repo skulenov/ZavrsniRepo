@@ -46,9 +46,11 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(284, 261);
             this.Controls.Add(this.TbxSrvInfo);
             this.Name = "ServerInfoForm";
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "Server Info";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ServerInfoForm_FormClosing);
             this.ResumeLayout(false);

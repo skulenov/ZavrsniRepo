@@ -8,9 +8,15 @@
 #define AT_TIMEOUT 5000 // ms
 SoftwareSerial esp(4, 3); // RX, TX(Arduino) -> TX, RX(ESP-01S)
 
+String readStr = "";
+String writeStr = "";
+char charData[] = { 204,0,25,85,15,185 };
+byte byteData[] = { 204,0,25,85,15,185 };
+
+
 void setup()
 {
-	Serial.begin(115200);
+	Serial.begin(9600);
 	esp.begin(9600);
 	while (!Serial);	// wait until Hardware Serial is ready
 	while (!esp);		// wait until Software Serial is ready
@@ -19,16 +25,27 @@ void setup()
 void loop()
 {
 
-	String readStr = "";
-	String writeStr = "";
+	readStr = "";
+	writeStr = "";
 
 	if (Serial.available())
 	{
-		writeStr = Serial.readStringUntil('\n');
+		writeStr = Serial.readString();
 	}
 	if (writeStr.length() > 0)
 	{
-		esp.println(writeStr);
+		if (writeStr.startsWith("dataChar"))
+		{
+			esp.write(charData, 6);
+		}
+		else if (writeStr.startsWith("byteData"))
+		{
+			esp.write(byteData, 6);
+		}
+		else
+		{
+			esp.println(writeStr);
+		}
 		esp.flush();
 		Serial.println("TX: ");
 		Serial.println(writeStr);
@@ -36,9 +53,9 @@ void loop()
 	}
 	while (esp.available() > 0)
 	{
-		readStr = esp.readStringUntil('\n');
+		readStr = esp.readString();
 	}
-	
+
 	if (readStr.length() > 0)
 	{
 		Serial.println("RX: ");
@@ -46,5 +63,15 @@ void loop()
 		Serial.flush();
 	}
 
+}
+
+byte fakeTemp()
+{
+	return ((micros() % 2) > 0) ? 25 : 30;
+}
+
+byte fakeHum()
+{
+	return ((micros() % 2) > 0) ? 50 : 90;
 }
 

@@ -169,11 +169,7 @@ String buildXML()
 
 String buildHTTPResponse(String data)
 {
-	String http = "HTTP/1.1 200 OK\r\n";
-	http += "Content - Type: text/xml\r\n";
-	http += "Connection: close\r\n";
-	http += "\r\n";
-	http += data;
-	http += "\r\n";
+	String http = "HTTP/1.1 200 OK\r\nContent - Type: text / xml\r\nConnection : close\r\n\r\n" + data + "\r\n";
+	
 	return http;
 }
