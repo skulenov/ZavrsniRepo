@@ -30,11 +30,11 @@ Upravljački program će periodički ostvarivati TCP/IP konekciju na serversku a
 
 Serverska aplikacija neprestano osluškuje na dolazne konekcije i po uspješnom ostvarenju iste, prima podatke, provjerava integritet istih i ukoliko su ispravni zapisuje ih na disk sa informacijom o trenutnom vremenu (na serveru).
 
-Osim logiranja podataka, serverska aplikacija ima funkcionalnost za prikaz prethodno spremljenih ili generiranih datoteka sa podacima u obliku grafova u vremenu.
+Osim logiranja podataka, serverska aplikacija ima funkcionalnost za prikaz prethodno spremljenih ili generiranih datoteka sa podacima u obliku grafova u vremenu (i u realnom vremenu, osvježavajući prikaz svakih 10 sekundi ako je trenutno aktivan Arduino modul i konekcija).
 
 Pojedini graf se može spremiti kao slikovna datoteka u *.PNG formatu.
 
-Projekt je još u fazi izrade.
+Programski dio projekta je završen i testiran, upravljači program za Arduino/Genuino platformu može se naći pod imenom DataSenderUnit.ino.
 
 
 Autor: Sead Kulenović
