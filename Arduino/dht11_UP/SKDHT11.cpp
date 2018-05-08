@@ -1,8 +1,11 @@
 //	FILE: SKDHT11.cpp
 //	VERSION: 0.0.1
-//	PURPOSE: DHT11 Temperature & Humidity Sensor library for Arduino
-//	DATASHEET: http://www.micropik.com/PDF/dht11.pdf
-//	AUTHOR: Sead Kulenoviæ
+//	PURPOSE: DHT11 Temperature & Humidity Sensor library for Arduino Uno
+//	DATASHEET: https://github.com/skulenov/ZavrsniRepo/blob/master/Arduino/dht11_UP/dht11.pdf
+//	AUTHOR: Sead KulenoviÃ¦
+// 	NOTE: Library is based on the work of others but was modified to follow the provided datasheet specifications.
+//	      See the Arduino Playground for more info on other libraries at: 
+//	      https://playground.arduino.cc/Main/DHT11Lib
 
 #include "SKDHT11.h"
 
@@ -29,7 +32,7 @@ enum
 	BYTE_MSB = 7,
 	
 	//	Number of bits in data array = DATA_BYTES * 8 => 40
-	DATA_BITS = 8 * DATA_BYTES,
+	DATA_BITS = BYTE_BITS * DATA_BYTES,
 
 	// 	Start request delay in ms (18) LOW
 	START_DELAY_MS = 20,
