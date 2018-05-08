@@ -93,7 +93,7 @@ SKDHT11::SensorState SKDHT11::begin()
 				if ((state = this->getPinFlipFrom(HIGH, ONE_DELAY_US)) != SSRD_OK)	return state;
 
 				//	we are here so we got something:
-				//	if longer than ZERO_DELAY it's "1" so LEFT-SHIFT it msb_idx bits then OR it with 
+				//	if longer than ZERO_DELAY it's "1" so LEFT-SHIFT it bit_idx bits then OR it with 
 				//	the data_buffer bit (it's "0"), else leave it "0"
 				if ((micros() - high_mark) > ZERO_DELAY_US)
 					data_buffer[i / BYTE_BITS] |= (1 << bit_idx);
@@ -120,10 +120,13 @@ SKDHT11::SensorState SKDHT11::begin()
 
 SKDHT11::SensorState SKDHT11::getPinFlipFrom(const int oldState,uint8_t delay_us)
 {
+	// Nothing can happen in 10 us on DHT11 so discard this and return as timeout
 	if (delay_us < 10) return SSRD_ERR_TOUT;
 
 	unsigned long mark = micros();
-
+	
+	// Check the pin state as fast as possible, if it doesn't change for longer than delay_us return as timeout,
+	// otherwise (it changed/flipped state) return OK
 	while ((digitalRead(this->_comm_pin) == oldState))
 	{
 		if (micros() - mark > delay_us)
